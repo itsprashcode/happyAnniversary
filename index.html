@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy 1 Month Anniversary 💙</title>
+  <link rel="icon" href="../Assets/logo.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb, #fbc2eb);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      color: #333;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    .content-wrapper {
+      padding: 30px;
+      animation: fadeIn 2s ease-in;
+    }
+    h1 {
+      font-size: 2.8rem;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      font-weight: 600;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    h2 {
+      font-size: 1.5rem;
+      color: #34495e;
+      margin-top: 15px;
+    }
+    .her-name {
+      color: #6c5ce7;
+      font-weight: bold;
+      animation: glowName 2s infinite alternate;
+    }
+    p { color: #444; }
+
+    /* Gallery */
+    .gallery {
+      margin: 30px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      border: 3px solid transparent;
+      transition: transform 0.4s ease, border 0.5s ease;
+      animation: fadeUp 1s ease forwards;
+      cursor: pointer;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      border: 3px solid #6c5ce7;
+    }
+    .gallery img.jump {
+      animation: jump 0.6s ease;
+    }
+    @keyframes jump {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15) translateY(-10px); }
+      100% { transform: scale(1); }
+    }
+
+    /* Lightbox */
+    #lightbox {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      animation: fadeZoom 0.5s ease;
+    }
+    @keyframes fadeZoom {
+      from { opacity: 0; transform: scale(0.7); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Message Box */
+    .emotional-msg {
+      white-space: pre-line;
+      margin: 25px auto;
+      max-width: 750px;
+      font-size: 1.1rem;
+      background: #ffffffee;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+      color: #2d3436;
+      line-height: 1.7;
+      min-height: 200px;
+      animation: fadeUp 1.5s ease forwards;
+    }
+    .watermark {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 30px;
+      font-style: italic;
+    }
+
+    /* Surprise Message */
+    #surprise-msg {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #e84393;
+      font-weight: bold;
+      animation: glowName 2s infinite alternate;
+    }
+    #gift-btn {
+      background: #ff7675;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+    #gift-btn:hover { background: #d63031; }
+
+    /* Countdown */
+    #countdown {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #2d3436;
+      font-weight: 600;
+    }
+
+    /* Animations */
+    @keyframes fadeIn { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+    @keyframes fadeUp { from {opacity:0; transform: translateY(30px);} to {opacity:1; transform: translateY(0);} }
+    @keyframes glow { from {text-shadow: 0 0 10px #a29bfe;} to {text-shadow: 0 0 20px #6c5ce7;} }
+    @keyframes glowName { from {text-shadow: 0 0 8px #81ecec;} to {text-shadow: 0 0 20px #00cec9;} }
+    @keyframes floatingHearts {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+    @keyframes fall { to { transform: translateY(100vh); opacity: 0; } }
+
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      font-size: 2rem;
+      animation: floatingHearts 7s linear infinite;
+      left: calc(100% * var(--pos));
+      pointer-events: none;
+    }
+    .heart.blue { color: #74b9ff; }
+    .heart.purple { color: #a29bfe; }
+    .heart.pink { color: #fd79a8; }
+
+    /* Music Button */
+    #music-btn {
+      background: #6c5ce7;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+    #music-btn:hover { background: #5a4bcf; }
+
+    /* Custom Heart Cursor */
+    .cursor-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 20px;
+      color: #e84393;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Song -->
+  <audio id="bg-music" loop>
+    <source src="Pages/Assets/songTereMastMastDoNaina1.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="content-wrapper">
+    <h1>💙 Happy 1 Month Anniversary 💜</h1>
+    <h2>To My Favorite Person in the World, <span class="her-name">Snehal</span> 🌸</h2>
+    <p>One month, countless memories, and a forever to go ✨</p>
+
+    <!-- Music Toggle -->
+    <button id="music-btn">🎶 Play Music</button>
+
+    <!-- Gift Button -->
+    <button id="gift-btn">🎁 Open Surprise</button>
+    <p id="surprise-msg">I Love You Snehal ❤️ Forever & Always 💕</p>
+
+    <!-- Countdown Timer -->
+    <p id="countdown"></p>
+
+    <!-- Photo Gallery -->
+    <div class="gallery">
+      <img src="Pages/Assets/temple.jpg" alt="Our Memory 1">
+      <img src="Pages/Assets/roomblueshirt.jpg" alt="Our Memory 2">
+      <img src="Pages/Assets/pgMax.jpg" alt="Our Memory 3">
+      <img src="Pages/Assets/sarasbaug.jpg" alt="Our Memory 4">
+    </div>
+
+    <!-- Emotional Message -->
+    <div class="emotional-msg" id="typed-msg"></div>
+
+    <p class="watermark">"In your smile, I see my whole world, Snehal 💕"</p>
+  </div>
+
+  <!-- Lightbox Container -->
+  <div id="lightbox"></div>
+
+  <script>
+    // Sparkles
+    function createSparkle() {
+      const sparkle = document.createElement("div");
+      sparkle.innerHTML = "✨";
+      sparkle.style.position = "fixed";
+      sparkle.style.left = Math.random() * 100 + "vw";
+      sparkle.style.top = "-2vh";
+      sparkle.style.fontSize = "1.5rem";
+      sparkle.style.opacity = "0.8";
+      sparkle.style.animation = "fall 5s linear forwards";
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 5000);
+    }
+    setInterval(createSparkle, 900);
+
+    // Floating Hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart " + ["blue","purple","pink"][Math.floor(Math.random()*3)];
+      heart.style.left = Math.random()*100 + "vw";
+      heart.style.fontSize = (Math.random()*20+15) + "px";
+      heart.style.animationDuration = (6 + Math.random()*4) + "s";
+      heart.innerHTML = ["💙","💜","💖"][Math.floor(Math.random()*3)];
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(), 10000);
+    }
+    setInterval(createHeart, 1200);
+
+    // Typewriter
+    const text = `It’s only been a month,
+Yet it feels like you’ve been a part of me forever 💙
+
+Every smile, every laugh, every silly fight,
+Has made this month the most special of my life.
+
+You’re my best surprise, my safe place, my dream come true 🌸
+I’m so grateful for every little moment with you.
+
+Here’s to one month down,
+And a lifetime to go, together 💜
+I love you endlessly.`;
+
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typed-msg").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+    window.onload = typeWriter;
+
+    // Music Button
+    const music = document.getElementById("bg-music");
+    const musicBtn = document.getElementById("music-btn");
+    music.play();
+    let isPlaying = true;
+
+    musicBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        music.pause();
+        musicBtn.textContent = "🎶 Play Music";
+      } else {
+        music.play();
+        musicBtn.textContent = "⏸ Pause Music";
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // Hidden Surprise Button
+    const giftBtn = document.getElementById("gift-btn");
+    const surpriseMsg = document.getElementById("surprise-msg");
+    giftBtn.addEventListener("click", () => {
+      surpriseMsg.style.display = "block";
+      giftBtn.style.display = "none";
+    });
+
+    // Countdown Timer
+    function updateCountdown() {
+      const startDate = new Date("August 4, 2025 19:45:00").getTime();
+      const now = new Date().getTime();
+      const diff = now - startDate;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").textContent =
+        `We've been together for ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds 💕`;
+    }
+    setInterval(updateCountdown, 1000);
+
+    // Photo Click Animations (jump + lightbox)
+    const lightbox = document.getElementById("lightbox");
+    document.querySelectorAll(".gallery img").forEach(img => {
+      img.addEventListener("click", () => {
+        // jump animation
+        img.classList.add("jump");
+        setTimeout(() => img.classList.remove("jump"), 600);
+
+        // open lightbox
+        lightbox.innerHTML = "";
+        const bigImg = document.createElement("img");
+        bigImg.src = img.src;
+        lightbox.appendChild(bigImg);
+        lightbox.style.display = "flex";
+      });
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.style.display = "none";
+    });
+  </script>
+</body>
+</html>
